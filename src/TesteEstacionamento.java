@@ -40,44 +40,45 @@ public class TesteEstacionamento {
                     int escolhaCar;
                     int odometro;
 
-                    System.out.println("Escolha o Locatário");
-                    System.out.print("\n-> ");
+                    System.out.println("Digite o ID do Locatário");
+                    System.out.print("-> ");
                     escolhaLoc = in.nextInt();
                     System.out.println(Dados.listaDeLocatarios.get(escolhaLoc));
 
-                    System.out.println("Escolha o Carro");
                     Dados.listaDeEstacionamentos.get(0).mostrarCarrosNoEstacionamento();
-                    System.out.print("\n-> ");
+                    System.out.println("Escolha o Carro");
+                    System.out.print("-> ");
                     escolhaCar = in.nextInt();
-                    System.out.println("Digite o valor inicial do odômetro: ");
 
-                    System.out.print("\n-> ");
+                    System.out.println("Digite o valor inicial do odômetro: ");
+                    System.out.print("-> ");
                     odometro = in.nextInt();
 
                     Dados.listaDeEstacionamentos.get(0).alugarCarro(Dados.listaDeLocatarios.get(escolhaLoc), Dados.listaDeCarros.get(escolhaCar),
                                                                     odometro);
 
-                    System.out.println("Carro alugado com sucesso!");
-
-                    Dados.listaDeLocatarios.get(escolhaLoc).mostrarHistorico();
+                    System.out.println("*********Carro alugado com sucesso!************\n\n");
 
                     break;
                 case 4:
                     int escolhaCar2;
                     int odometro2;
-
-                    System.out.println("Escolha o Carro");
+                    
                     Dados.listaDeEstacionamentos.get(0).mostrarCarrosNoEstacionamento();
-                    System.out.print("\n-> ");
+                    System.out.println("Escolha o Carro");
+                    System.out.print("-> ");
                     escolhaCar2 = in.nextInt();
-                    System.out.println("Digite o valor final do odômetro: ");
 
-                    System.out.print("\n-> ");
+                    System.out.println("Digite o valor final do odômetro: ");
+                    System.out.print("-> ");
                     odometro2 = in.nextInt();
 
-                    Dados.listaDeEstacionamentos.get(0).retornarCarro(Dados.listaDeCarros.get(escolhaCar2), odometro2);
+                    Dados.listaDeEstacionamentos.get(0).retornarCarro(Dados.listaDeCarros.get(escolhaCar2).getAluguelDoCarro(), odometro2);
 
-                    System.out.println("Carro retornado com sucesso!");
+                    System.out.println("*********Carro retornado com sucesso!************\n\n");
+
+                    Dados.listaDeLocatarios.get(1).getHistoricoDeAlugueis().getHistorico();
+
                     break;
 
             }

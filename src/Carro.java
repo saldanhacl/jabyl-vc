@@ -7,6 +7,7 @@ public class Carro {
     private String idRegistro;
     private boolean estahAlugado;
     private Locatario locatarioDoCarro;
+    private AluguelERetorno aluguelDoCarro;
 
     public Carro(String placa, String cor, String ano, String modelo) {
         this.placa = placa;
@@ -76,5 +77,13 @@ public class Carro {
 
     public void setLocatarioDoCarro(Locatario locatarioDoCarro) {
         this.locatarioDoCarro = locatarioDoCarro;
+    }
+
+    public AluguelERetorno getAluguelDoCarro() {
+        return aluguelDoCarro;
+    }
+
+    public void setAluguelDoCarro(AluguelERetorno aluguelDoCarro) {
+        this.aluguelDoCarro = aluguelDoCarro;
     }
 }
