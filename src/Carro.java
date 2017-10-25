@@ -6,6 +6,7 @@ public class Carro {
     private String modelo;
     private String idRegistro;
     private boolean estahAlugado;
+    private boolean estahReservado;
     private Locatario locatarioDoCarro;
     private AluguelERetorno aluguelDoCarro;
 
@@ -15,6 +16,7 @@ public class Carro {
         this.ano = ano;
         this.modelo = modelo;
         this.estahAlugado = false;
+        this.estahReservado = false;
     }
 
     @Override
@@ -62,13 +64,13 @@ public class Carro {
         this.idRegistro = idRegistro;
     }
 
-    public String getStatus() {
-        if (this.estahAlugado) return "Alugado";
-        else return "Disponível";
+    public String getEmAluguel() {
+        if (this.estahAlugado) return "Sim";
+        else return "Não";
     }
 
-    public void setStatus(boolean status){
-        this.estahAlugado = status;
+    public void setEstahAlugado(boolean estahAlugado) {
+        this.estahAlugado = estahAlugado;
     }
 
     public Locatario getLocatarioDoCarro() {
@@ -85,5 +87,14 @@ public class Carro {
 
     public void setAluguelDoCarro(AluguelERetorno aluguelDoCarro) {
         this.aluguelDoCarro = aluguelDoCarro;
+    }
+
+    public void setEstahReservado(boolean estahReservado) {
+        this.estahReservado = estahReservado;
+    }
+
+    public String getEstahReservado() {
+        if (this.estahReservado) return "Sim";
+        else return "Não";
     }
 }

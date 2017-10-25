@@ -24,9 +24,8 @@ public class Estacionamento extends PessoaJuridica{
             System.out.println("Cor: " + c.getCor());
             System.out.println("Ano: " + c.getAno());
             System.out.println("Placa: " + c.getPlaca());
-            System.out.println("Status: " + c.getStatus());
-            if (c.getStatus() == "Alugando")
-                System.out.println("Locatario: " + c.getLocatarioDoCarro());
+            System.out.println("Em aluguel: " + c.getEmAluguel());
+            System.out.println("Reservado: " + c.getEstahReservado());
             System.out.println("\n---------------------------------\n");
         }
     }
@@ -38,11 +37,14 @@ public class Estacionamento extends PessoaJuridica{
 
     public void retornarCarro(AluguelERetorno aluguel, int valorFinalDoOdometro){
         aluguel.setValorFinalDoOdometro(valorFinalDoOdometro);
-        aluguel.getCarroAlugado().setStatus(false);
+        aluguel.getCarroAlugado().setEstahAlugado(false);
         aluguel.getCarroAlugado().setLocatarioDoCarro(null);
         aluguel.getLocatarioAlugando().getHistoricoDeAlugueis().getListaDeAlugueis().add(aluguel);
     }
 
+    public List<Carro> getCarrosNoEstacionamento() {
+        return carrosNoEstacionamento;
+    }
 
     @Override
     public String toString() {

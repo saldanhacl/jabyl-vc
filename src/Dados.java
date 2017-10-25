@@ -37,9 +37,8 @@ public class Dados {
             System.out.println("Cor: " + c.getCor());
             System.out.println("Ano: " + c.getAno());
             System.out.println("Placa: " + c.getPlaca());
-            System.out.println("Status: " + c.getStatus());
-            if (c.getStatus() == "Alugando")
-                System.out.println("Locatario: " + c.getLocatarioDoCarro());
+            System.out.println("Em aluguel: " + c.getEmAluguel());
+            System.out.println("Reservado: " + c.getEstahReservado());
             System.out.println("---------------------------------\n");
         }
     }

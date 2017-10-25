@@ -9,7 +9,7 @@ public class AluguelERetorno {
         this.carroAlugado = carroAlugado;
         this.locatarioAlugando = locatarioAlugando;
         this.valorIncialDoOdometro = valorIncialDoOdometro;
-        carroAlugado.setStatus(true);
+        carroAlugado.setEstahAlugado(true);
         carroAlugado.setLocatarioDoCarro(locatarioAlugando);
     }
 

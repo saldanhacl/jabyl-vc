@@ -21,7 +21,7 @@ public class TesteEstacionamento {
 
         while (true) {
             System.out.println("\nO que deseja fazer?");
-            System.out.print("\n-> ");
+            System.out.print("-> ");
             escolha = in.nextInt();
 
             switch (escolha) {
@@ -57,7 +57,7 @@ public class TesteEstacionamento {
                     Dados.listaDeEstacionamentos.get(0).alugarCarro(Dados.listaDeLocatarios.get(escolhaLoc), Dados.listaDeCarros.get(escolhaCar),
                                                                     odometro);
 
-                    System.out.println("*********Carro alugado com sucesso!************\n\n");
+                    System.out.println("\n*********Carro alugado com sucesso!************\n");
 
                     break;
                 case 4:
@@ -75,7 +75,7 @@ public class TesteEstacionamento {
 
                     Dados.listaDeEstacionamentos.get(0).retornarCarro(Dados.listaDeCarros.get(escolhaCar2).getAluguelDoCarro(), odometro2);
 
-                    System.out.println("*********Carro retornado com sucesso!************\n\n");
+                    System.out.println("\n*********Carro retornado com sucesso!************\n");
 
                     Dados.listaDeLocatarios.get(1).getHistoricoDeAlugueis().getHistorico();
 

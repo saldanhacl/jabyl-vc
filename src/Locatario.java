@@ -29,4 +29,5 @@ public class Locatario extends PessoaFisica{
     public Historico getHistoricoDeAlugueis() {
         return historicoDeAlugueis;
     }
+
 }
