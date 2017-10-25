@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Estacionamento extends PessoaJuridica{
 
@@ -30,16 +31,60 @@ public class Estacionamento extends PessoaJuridica{
         }
     }
 
-    public void alugarCarro(Locatario l, Carro c, int valorInicialDoOdometro){
-        AluguelERetorno a = new AluguelERetorno(c,l,valorInicialDoOdometro);
-        c.setAluguelDoCarro(a);
+    public void alugarCarro(){
+
+        Scanner in = new Scanner(System.in);
+        int escolhaLoc;
+        int escolhaCar;
+        int odometro;
+
+        System.out.println("Digite o ID do Locatário");
+        System.out.print("-> ");
+        escolhaLoc = in.nextInt();
+        System.out.println(Dados.listaDeLocatarios.get(escolhaLoc));
+
+        Dados.listaDeEstacionamentos.get(0).mostrarCarrosNoEstacionamento();
+        System.out.println("Escolha o Carro");
+        System.out.print("-> ");
+        escolhaCar = in.nextInt();
+
+        System.out.println("Digite o valor inicial do odômetro: ");
+        System.out.print("-> ");
+        odometro = in.nextInt();
+
+        AluguelERetorno a = new AluguelERetorno(this.getCarrosNoEstacionamento().get(escolhaCar),Dados.listaDeLocatarios.get(escolhaLoc),
+                                                odometro);
+        this.getCarrosNoEstacionamento().get(escolhaCar).setAluguelDoCarro(a);
+
+        System.out.println("\n*********Carro alugado com sucesso!************\n");
+
     }
 
-    public void retornarCarro(AluguelERetorno aluguel, int valorFinalDoOdometro){
-        aluguel.setValorFinalDoOdometro(valorFinalDoOdometro);
-        aluguel.getCarroAlugado().setEstahAlugado(false);
-        aluguel.getCarroAlugado().setLocatarioDoCarro(null);
-        aluguel.getLocatarioAlugando().getHistoricoDeAlugueis().getListaDeAlugueis().add(aluguel);
+    public void retornarCarro(){
+
+        Scanner in = new Scanner(System.in);
+
+        int escolhaCar;
+        int odometro;
+
+        this.mostrarCarrosNoEstacionamento();
+        System.out.println("Escolha o Carro");
+        System.out.print("-> ");
+        escolhaCar = in.nextInt();
+
+        System.out.println("Digite o valor final do odômetro: ");
+        System.out.print("-> ");
+        odometro = in.nextInt();
+
+        Dados.listaDeCarros.get(escolhaCar).getAluguelDoCarro().setValorFinalDoOdometro(odometro);
+        Dados.listaDeCarros.get(escolhaCar).getLocatarioDoCarro().getHistoricoDeAlugueis().getListaDeAlugueis().add(Dados.listaDeCarros.get(escolhaCar).getAluguelDoCarro());
+        Dados.listaDeCarros.get(escolhaCar).setEstahAlugado(false);
+        Dados.listaDeCarros.get(escolhaCar).setLocatarioDoCarro(null);
+
+        System.out.println("\n*********Carro retornado com sucesso!************\n");
+
+        Dados.listaDeLocatarios.get(1).getHistoricoDeAlugueis().getHistorico();
+
     }
 
     public List<Carro> getCarrosNoEstacionamento() {

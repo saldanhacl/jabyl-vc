@@ -36,49 +36,10 @@ public class TesteEstacionamento {
                     Dados.listaDeEstacionamentos.get(0).mostrarCarrosNoEstacionamento();
                     break;
                 case 3:
-                    int escolhaLoc;
-                    int escolhaCar;
-                    int odometro;
-
-                    System.out.println("Digite o ID do Locatário");
-                    System.out.print("-> ");
-                    escolhaLoc = in.nextInt();
-                    System.out.println(Dados.listaDeLocatarios.get(escolhaLoc));
-
-                    Dados.listaDeEstacionamentos.get(0).mostrarCarrosNoEstacionamento();
-                    System.out.println("Escolha o Carro");
-                    System.out.print("-> ");
-                    escolhaCar = in.nextInt();
-
-                    System.out.println("Digite o valor inicial do odômetro: ");
-                    System.out.print("-> ");
-                    odometro = in.nextInt();
-
-                    Dados.listaDeEstacionamentos.get(0).alugarCarro(Dados.listaDeLocatarios.get(escolhaLoc), Dados.listaDeCarros.get(escolhaCar),
-                                                                    odometro);
-
-                    System.out.println("\n*********Carro alugado com sucesso!************\n");
-
+                    Dados.listaDeEstacionamentos.get(0).alugarCarro();
                     break;
                 case 4:
-                    int escolhaCar2;
-                    int odometro2;
-                    
-                    Dados.listaDeEstacionamentos.get(0).mostrarCarrosNoEstacionamento();
-                    System.out.println("Escolha o Carro");
-                    System.out.print("-> ");
-                    escolhaCar2 = in.nextInt();
-
-                    System.out.println("Digite o valor final do odômetro: ");
-                    System.out.print("-> ");
-                    odometro2 = in.nextInt();
-
-                    Dados.listaDeEstacionamentos.get(0).retornarCarro(Dados.listaDeCarros.get(escolhaCar2).getAluguelDoCarro(), odometro2);
-
-                    System.out.println("\n*********Carro retornado com sucesso!************\n");
-
-                    Dados.listaDeLocatarios.get(1).getHistoricoDeAlugueis().getHistorico();
-
+                    Dados.listaDeEstacionamentos.get(0).retornarCarro();
                     break;
 
             }
