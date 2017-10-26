@@ -4,7 +4,7 @@ import java.util.List;
 public class Locatario extends PessoaFisica{
 
     private String cnh;
-    private Historico historicoDeAlugueis = new Historico();
+    private Historico historicoDeAlugueis = new Historico(false);
 
     public Locatario(String nome, String telefone, String email, String senha,
                      String cpf, String rg, String sobrenome, String dataDeNascimento,
@@ -15,7 +15,7 @@ public class Locatario extends PessoaFisica{
 
     @Override
     public String toString() {
-        return super.toString() + " CNH: " + this.cnh;
+        return super.toString();
     }
 
     public String getCnh() {

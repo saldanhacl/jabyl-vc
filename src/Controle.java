@@ -6,6 +6,7 @@ public class Controle {
 
     static Scanner in = new Scanner(System.in);
     List<Locatario> listaDeLocatarios = new ArrayList<>();
+    List<Locador> listaDeLocadores = new ArrayList<>();
     List<Estacionamento> listaDeEstacionamentos = new ArrayList<>();
     List<Carro> listaDeCarros = new ArrayList<>();
 
@@ -18,6 +19,15 @@ public class Controle {
 
     }
 
+    public void cadastrarLocador(Locador l){
+
+        if(!listaDeLocadores.contains(l)) {
+            listaDeLocadores.add(l);
+            System.out.println("Locador(a) " + l + " cadastrado(a) com sucesso!");
+        } else System.out.println("Locador já cadastrado!");
+
+    }
+
     public void cadastrarEstacionamento(Estacionamento e){
 
         if(!listaDeEstacionamentos.contains(e)) {
@@ -27,18 +37,39 @@ public class Controle {
 
     }
 
-    public void cadastrarCarro(Carro c){
-        if(!listaDeCarros.contains(c)) {
+    public void cadastrarCarroNosDados(Carro c){
+        if(!listaDeCarros.contains(c))
             listaDeCarros.add(c);
-            System.out.println("Carro " + c + " cadastrado(a) com sucesso!");
-        } else System.out.println("Carro já cadastrado!");
     }
 
+    public Carro cadastrarCarro(){
+        System.out.println("\n-------------- CADASTRO DE CARRO --------------\n");
 
-    public void mostrarCarros(){
+        String placa;
+        String cor;
+        String ano;
+        String modelo;
+
+
+        System.out.print("Placa: ");
+        placa = in.next();
+        System.out.print("Cor: ");
+        cor = in.next();
+        System.out.print("Ano: ");
+        ano = in.next();
+        System.out.print("Modelo: ");
+        modelo = in.next();
+
+
+        Carro carCadastrar = new Carro(placa,cor,ano,modelo);
+        return carCadastrar;
+    }
+
+    public void mostrarCarros(List<Carro> listaDeCarros){
         System.out.println("\n---------- CARROS ----------\n");
         for (Carro  c : listaDeCarros) {
             System.out.println("ID #" + listaDeCarros.indexOf(c));
+            System.out.println("Dono: " + c.getDonoDoCarro().getPessoaLocador());
             System.out.println("Modelo: " + c.getModelo());
             System.out.println("Cor: " + c.getCor());
             System.out.println("Ano: " + c.getAno());
@@ -62,6 +93,31 @@ public class Controle {
             System.out.println("RG: " + l.getRg());
             System.out.println("CNH: " + l.getCnh());
             System.out.println("---------------------------------\n");
+        }
+    }
+
+    public void mostrarLocadores(){
+
+        System.out.println("\n---------- LOCADORES ----------\n");
+
+        for (Locador l : listaDeLocadores) {
+            if (l.getPessoaLocador() instanceof PessoaFisica) {
+                System.out.println("ID #" + listaDeLocadores.indexOf(l));
+                System.out.println("Nome: " + l.getPessoaLocador().getNome() + " " + ((PessoaFisica)l.getPessoaLocador()).getSobrenome());
+                System.out.println("Email: " + l.getPessoaLocador().getEmail());
+                System.out.println("Data de Nascimento: " + ((PessoaFisica)l.getPessoaLocador()).getDataDeNascimento());
+                System.out.println("Telefone: " + l.getPessoaLocador().getTelefone());
+                System.out.println("CPF: " + ((PessoaFisica)l.getPessoaLocador()).getCpf());
+                System.out.println("RG: " + ((PessoaFisica)l.getPessoaLocador()).getRg());
+                System.out.println("---------------------------------\n");
+            } else {
+                System.out.println("ID #" + listaDeLocadores.indexOf(l));
+                System.out.println("Nome: " + l.getPessoaLocador().getNome());
+                System.out.println("Email: " + l.getPessoaLocador().getEmail());
+                System.out.println("Telefone: " + l.getPessoaLocador().getTelefone());
+                System.out.println("CNPJ: " + ((PessoaJuridica)l.getPessoaLocador()).getCnpj());
+                System.out.println("---------------------------------\n");
+            }
         }
     }
 
@@ -103,36 +159,43 @@ public class Controle {
             switch (escolhaMenu) {
 
                 case 0:
-                    System.out.println("\nAté logo!\n");
+                    System.out.println("\nVoltando...\n");
                     return;
                 case 1:
-                    this.mostrarCarros();
+                    int escolhaLocador = -1;
                     int escolhaCar = -1;
+
+                    System.out.println("Digite o ID do Locador");
+                    System.out.print("-> ");
+                    escolhaLocador = in.nextInt();
+
+                    this.mostrarCarros(this.listaDeLocadores.get(escolhaLocador).getCarrosDoLocador());
 
                     System.out.println("Escolha o carro que deseja registrar");
                     System.out.print("-> ");
                     escolhaCar = in.nextInt();
-                    this.getListaDeEstacionamentos().get(escolhaEst).registrarCarro(this.listaDeCarros.get(escolhaCar));
+
+                    this.getListaDeEstacionamentos().get(escolhaEst).registrarCarro(this.listaDeLocadores.get(escolhaLocador).getCarrosDoLocador().get(escolhaCar));
                     break;
                 case 2:
                     this.getListaDeEstacionamentos().get(escolhaEst).mostrarCarrosNoEstacionamento();
                     break;
                 case 3:
 
-                    int escolhaLoc;
-                    int escolhaCarAluguel;
+                    int escolhaLocatario = -1;
+                    int escolhaCarAluguel = -1;
 
                     System.out.println("Digite o ID do Locatário");
                     System.out.print("-> ");
-                    escolhaLoc = in.nextInt();
+                    escolhaLocatario = in.nextInt();
 
                     this.getListaDeEstacionamentos().get(escolhaEst).mostrarCarrosNoEstacionamento();
                     System.out.println("Escolha o Carro");
                     System.out.print("-> ");
                     escolhaCarAluguel = in.nextInt();
 
-                    this.getListaDeEstacionamentos().get(escolhaEst).alugarCarro(this.getListaDeLocatarios().get(escolhaLoc),
-                                                                                this.getListaDeCarros().get(escolhaCarAluguel));
+                    this.getListaDeEstacionamentos().get(escolhaEst).alugarCarro(this.getListaDeLocatarios().get(escolhaLocatario),
+                            this.getListaDeEstacionamentos().get(escolhaEst).getCarrosNoEstacionamento().get(escolhaCarAluguel));
                     break;
                 case 4:
 
@@ -158,11 +221,12 @@ public class Controle {
 
         while (true) {
             System.out.println("\n1 - Cadastrar Locatário");
-            System.out.println("2 - Cadastrar Estacionamento");
-            System.out.println("3 - Cadastrar Carro");
+            System.out.println("2 - Cadastrar Locador");
+            System.out.println("3 - Cadastrar Estacionamento");
             System.out.println("4 - Mostrar Locatários");
-            System.out.println("5 - Mostrar Estacionamentos");
-            System.out.println("6 - Mostrar Carros");
+            System.out.println("5 - Mostrar Locadores");
+            System.out.println("6 - Mostrar Estacionamentos");
+            System.out.println("7 - Mostrar Carros");
             System.out.println("0 - Voltar");
             System.out.println("\nO que deseja fazer?");
             System.out.print("-> ");
@@ -171,7 +235,7 @@ public class Controle {
             switch (escolhaMenu) {
 
                 case 0:
-                    System.out.println("\nAté logo!\n");
+                    System.out.println("\nVoltando...\n");
                     return;
                 case 1:
 
@@ -212,6 +276,79 @@ public class Controle {
                     break;
                 case 2:
 
+                    int escolhaPessoa = -1;
+
+                    System.out.println("Escolha o tipo de pessoa do Locador");
+                    System.out.println("1 - Pessoa Física");
+                    System.out.println("2 - Pessoa Jurídica");
+                    escolhaPessoa = in.nextInt();
+
+                    if (escolhaPessoa == 1) {
+
+                        System.out.println("\n-------------- CADASTRO DE LOCADOR --------------\n");
+
+                        String nomeLocador;
+                        String telefoneLocador;
+                        String emailLocador;
+                        String senhaLocador;
+                        String cpfLocador;
+                        String rgLocador;
+                        String sobrenomeLocador;
+                        String dataDeNascimentoLocador;
+
+                        System.out.print("\nNome: ");
+                        nomeLocador = in.next();
+                        System.out.print("Sobrenome: ");
+                        sobrenomeLocador = in.next();
+                        System.out.print("Telefone: ");
+                        telefoneLocador = in.next();
+                        System.out.print("Email: ");
+                        emailLocador = in.next();
+                        System.out.print("Senha: ");
+                        senhaLocador = in.next();
+                        System.out.print("CPF: ");
+                        cpfLocador = in.next();
+                        System.out.print("RG: ");
+                        rgLocador = in.next();
+                        System.out.print("Data de nascimento: ");
+                        dataDeNascimentoLocador = in.next();
+
+                        PessoaFisica p = new PessoaFisica(nomeLocador, telefoneLocador, emailLocador, senhaLocador, cpfLocador, rgLocador, sobrenomeLocador, dataDeNascimentoLocador);
+
+                        Locador locadorCadastrar = new Locador(p);
+                        this.cadastrarLocador(locadorCadastrar);
+
+                    }
+                    else {
+
+                        System.out.println("\n-------------- CADASTRO DE LOCADOR --------------\n");
+
+                        String nomeLocador;
+                        String telefoneLocador;
+                        String emailLocador;
+                        String senhaLocador;
+                        String cnpjLocador;
+
+                        System.out.print("\nNome: ");
+                        nomeLocador = in.next();;
+                        System.out.print("Telefone: ");
+                        telefoneLocador = in.next();
+                        System.out.print("Email: ");
+                        emailLocador = in.next();
+                        System.out.print("Senha: ");
+                        senhaLocador = in.next();
+                        System.out.print("CNPJ: ");
+                        cnpjLocador = in.next();
+
+                        PessoaJuridica p = new PessoaJuridica(nomeLocador, telefoneLocador, emailLocador, senhaLocador, cnpjLocador);
+
+                        Locador locadorCadastrar = new Locador(p);
+                        this.cadastrarLocador(locadorCadastrar);
+
+                    }
+                    break;
+                case 3:
+
                     System.out.println("\n-------------- CADASTRO DE ESTACIONAMENTO --------------\n");
 
                     String nomeEst;
@@ -236,38 +373,17 @@ public class Controle {
                     this.cadastrarEstacionamento(estCadastrar);
 
                     break;
-                case 3:
-
-                    System.out.println("\n-------------- CADASTRO DE CARRO --------------\n");
-
-                    String placa;
-                    String cor;
-                    String ano;
-                    String modelo;
-
-
-                    System.out.print("Placa: ");
-                    placa = in.next();
-                    System.out.print("Cor: ");
-                    cor = in.next();
-                    System.out.print("Ano: ");
-                    ano = in.next();
-                    System.out.print("Modelo: ");
-                    modelo = in.next();
-
-
-                    Carro carCadastrar = new Carro(placa,cor,ano,modelo);
-                    this.cadastrarCarro(carCadastrar);
-
-                    break;
                 case 4:
                     this.mostrarLocatarios();
                     break;
                 case 5:
-                    this.mostrarEstacionamentos();
+                    this.mostrarLocadores();
                     break;
                 case 6:
-                    this.mostrarCarros();
+                    this.mostrarEstacionamentos();
+                    break;
+                case 7:
+                    this.mostrarCarros(this.listaDeCarros);
                     break;
 
             }
@@ -296,7 +412,7 @@ public class Controle {
             switch (escolhaMenu) {
 
                 case 0:
-                    System.out.println("\nAté logo!\n");
+                    System.out.println("\nVoltando...\n");
                     return;
                 case 1:
                     int estacionamentoAtual;
@@ -326,6 +442,47 @@ public class Controle {
         }
     }
 
+
+    public void controlarLocador(){
+
+        int escolhaLoc = -1;
+        int escolhaMenu = -1;
+
+        System.out.println("Digite o ID do Locador");
+        System.out.print("-> ");
+        escolhaLoc = in.nextInt();
+
+        System.out.println("\n-------------- LOCADOR --------------\n");
+
+        while (true) {
+            System.out.println("\n1 - Cadastrar Carro");
+            System.out.println("2 - Mostrar histórico");
+            System.out.println("3 - Mostrar Carros");
+            System.out.println("0 - Voltar");
+            System.out.println("\nO que deseja fazer?");
+            System.out.print("\n-> ");
+            escolhaMenu = in.nextInt();
+
+            switch (escolhaMenu) {
+
+                case 0:
+                    System.out.println("\nVoltando...\n");
+                    return;
+                case 1:
+                    Carro carroCadastrado = this.cadastrarCarro();
+                    listaDeLocadores.get(escolhaLoc).cadastrarCarro(carroCadastrado);
+                    this.cadastrarCarroNosDados(carroCadastrado);
+                    break;
+                case 2:
+                    this.getListaDeLocadores().get(escolhaLoc).getHistoricoDeAlugueis().getHistorico();
+                    break;
+                case 3:
+                    this.mostrarCarros(this.getListaDeLocadores().get(escolhaLoc).getCarrosDoLocador());
+                    break;
+            }
+        }
+    }
+
     public List<Locatario> getListaDeLocatarios() {
         return listaDeLocatarios;
     }
@@ -338,6 +495,10 @@ public class Controle {
         return listaDeCarros;
     }
 
+    public List<Locador> getListaDeLocadores() {
+        return listaDeLocadores;
+    }
+
     public static void main(String[] args) {
 
         Controle c = new Controle();
@@ -345,11 +506,47 @@ public class Controle {
         c.cadastrarEstacionamento(new Estacionamento("Park", "31992006338", "park@gmail.com", "1234",
                 "31442325000158"));
 
+        c.cadastrarEstacionamento(new Estacionamento("EstAqui", "34988754087", "estaqui@gmail.com", "1234",
+                "81453227000194"));
+
         c.cadastrarLocatario(new Locatario("Danilo", "38982741538", "danilo@gmail.com","1234",
                 "11762914670", "310554019", "Silva", "07/06/1996"
                 ,"94604268637"));
 
-        c.cadastrarCarro(new Carro("HGO7806", "Dourado", "2008", "Uno"));
+        c.cadastrarLocatario(new Locatario("Gabriel", "32992321210", "gabriel@gmail.com","1234",
+                "24212742659", "135189718", "Martins", "12/02/1995"
+                ,"94604268637"));
+
+        PessoaFisica p1 = new PessoaFisica("Stefany", "31987103842", "stefany@gmail.com", "YJGgnCdM2a",
+                                            "14995895655", "253400041", "Cavalcanti", "21/04/1995");
+
+        PessoaFisica p2 = new PessoaFisica("César", "34988244706", "cesar@gmail.com", "0i3sUJr8BE",
+                "87296830689", "288296102", "Araújo", "02/06/1995");
+
+        PessoaJuridica pj = new PessoaJuridica("PUCMG", "31987424764", "puc@gmail.com", "1234", "34773391000107");
+
+        Locador loc1 = new Locador(p1);
+        Locador loc2 = new Locador(p2);
+        Locador loc3 = new Locador(pj);
+
+        Carro c1 = new Carro("HAW9853", "Vermelho", "2010", "Strada");
+        Carro c2 = new Carro("GNH3515", "Vermelho", "2015", "Siena");
+        Carro c3 = new Carro("HKS0096", "Marrom", "2004", "Doblo");
+        Carro c4 = new Carro("HAW9853", "Verde", "2010", "Stilo");
+
+        loc1.cadastrarCarro(c1);
+        loc2.cadastrarCarro(c2);
+        loc3.cadastrarCarro(c3);
+        loc3.cadastrarCarro(c4);
+
+        c.cadastrarCarroNosDados(c1);
+        c.cadastrarCarroNosDados(c2);
+        c.cadastrarCarroNosDados(c3);
+        c.cadastrarCarroNosDados(c4);
+
+        c.cadastrarLocador(loc1);
+        c.cadastrarLocador(loc2);
+        c.cadastrarLocador(loc3);
 
         int escolha = -1;
 
@@ -358,7 +555,8 @@ public class Controle {
         while (true) {
             System.out.println("\n1 - Estacionamento");
             System.out.println("2 - Locatário");
-            System.out.println("3 - Dados");
+            System.out.println("3 - Locador");
+            System.out.println("4 - Dados");
             System.out.println("0 - Sair");
             System.out.println("\nO que deseja controlar?");
             System.out.print("-> ");
@@ -376,6 +574,9 @@ public class Controle {
                     c.controlarLocatario();
                     break;
                 case 3:
+                    c.controlarLocador();
+                    break;
+                case 4:
                     c.controlarDados();
                     break;
             }

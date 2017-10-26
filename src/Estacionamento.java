@@ -13,14 +13,15 @@ public class Estacionamento extends PessoaJuridica{
     public void registrarCarro(Carro c){
         if(!carrosNoEstacionamento.contains(c)) {
             carrosNoEstacionamento.add(c);
-            System.out.println(c + " " + c.getCor() + " " + c.getAno() + " cadastrado(a) com sucesso!");
-        } else System.out.println("Carro já cadastrado!");
+            System.out.println(c + " " + c.getCor() + " " + c.getAno() + " registrado com sucesso!");
+        } else System.out.println("Carro já registrado!");
     }
 
     public void mostrarCarrosNoEstacionamento(){
         System.out.println("\n---------- CARROS ----------\n");
         for (Carro  c : carrosNoEstacionamento) {
             System.out.println("Carro #" + carrosNoEstacionamento.indexOf(c));
+            System.out.println("Dono: " + c.getDonoDoCarro().getPessoaLocador());
             System.out.println("Modelo: " + c.getModelo());
             System.out.println("Cor: " + c.getCor());
             System.out.println("Ano: " + c.getAno());
@@ -42,7 +43,6 @@ public class Estacionamento extends PessoaJuridica{
 
         AluguelERetorno a = new AluguelERetorno(c,l,odometro);
         c.setAluguelDoCarro(a);
-
         System.out.println("\n*********Carro alugado com sucesso!************\n");
 
     }
@@ -59,6 +59,7 @@ public class Estacionamento extends PessoaJuridica{
 
         c.getAluguelDoCarro().setValorFinalDoOdometro(odometro);
         c.getLocatarioDoCarro().getHistoricoDeAlugueis().getListaDeAlugueis().add(c.getAluguelDoCarro());
+        c.getDonoDoCarro().getHistoricoDeAlugueis().getListaDeAlugueis().add(c.getAluguelDoCarro());
         c.setEstahReservado(false);
         c.setEstahAlugado(false);
         c.setLocatarioDoCarro(null);

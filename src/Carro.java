@@ -9,6 +9,7 @@ public class Carro {
     private boolean estahReservado;
     private Locatario locatarioDoCarro;
     private AluguelERetorno aluguelDoCarro;
+    private Locador donoDoCarro;
 
     public Carro(String placa, String cor, String ano, String modelo) {
         this.placa = placa;
@@ -67,6 +68,14 @@ public class Carro {
     public String getEmAluguel() {
         if (this.estahAlugado) return "Sim";
         else return "Não";
+    }
+
+    public Locador getDonoDoCarro() {
+        return donoDoCarro;
+    }
+
+    public void setDonoDoCarro(Locador donoDoCarro) {
+        this.donoDoCarro = donoDoCarro;
     }
 
     public void setEstahAlugado(boolean estahAlugado) {
