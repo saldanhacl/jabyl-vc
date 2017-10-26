@@ -59,6 +59,7 @@ public class Estacionamento extends PessoaJuridica{
 
         c.getAluguelDoCarro().setValorFinalDoOdometro(odometro);
         c.getLocatarioDoCarro().getHistoricoDeAlugueis().getListaDeAlugueis().add(c.getAluguelDoCarro());
+        c.setEstahReservado(false);
         c.setEstahAlugado(false);
         c.setLocatarioDoCarro(null);
 

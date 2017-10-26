@@ -38,7 +38,7 @@ public class Controle {
     public void mostrarCarros(){
         System.out.println("\n---------- CARROS ----------\n");
         for (Carro  c : listaDeCarros) {
-            System.out.println("Carro #" + listaDeCarros.indexOf(c));
+            System.out.println("ID #" + listaDeCarros.indexOf(c));
             System.out.println("Modelo: " + c.getModelo());
             System.out.println("Cor: " + c.getCor());
             System.out.println("Ano: " + c.getAno());
@@ -53,6 +53,7 @@ public class Controle {
 
         System.out.println("\n---------- LOCATÁRIOS ----------\n");
         for (Locatario l : listaDeLocatarios) {
+            System.out.println("ID #" + listaDeLocatarios.indexOf(l));
             System.out.println("Nome: " + l.getNome() + " " + l.getSobrenome());
             System.out.println("Email: " + l.getEmail());
             System.out.println("Data de Nascimento: " + l.getDataDeNascimento());
@@ -68,6 +69,7 @@ public class Controle {
 
         System.out.println("\n---------- ESTACIONAMENTOS ----------\n");
         for (Estacionamento e : listaDeEstacionamentos) {
+            System.out.println("ID #" + listaDeEstacionamentos.indexOf(e));
             System.out.println("Nome: " + e.getNome());
             System.out.println("Email: " + e.getEmail());
             System.out.println("Telefone: " + e.getTelefone());
@@ -86,13 +88,14 @@ public class Controle {
         escolhaEst = in.nextInt();
 
         System.out.println("\n-------------- ESTACIONAMENTO --------------\n");
-        System.out.println("1 - Registrar Carro");
-        System.out.println("2 - Mostrar Carros");
-        System.out.println("3 - Alugar Carro");
-        System.out.println("4 - Retornar Carro");
-        System.out.println("0 - Sair");
+
 
         while (true) {
+            System.out.println("\n1 - Registrar Carro");
+            System.out.println("2 - Mostrar Carros");
+            System.out.println("3 - Alugar Carro");
+            System.out.println("4 - Retornar Carro");
+            System.out.println("0 - Voltar");
             System.out.println("\nO que deseja fazer?");
             System.out.print("-> ");
             escolhaMenu = in.nextInt();
@@ -103,7 +106,13 @@ public class Controle {
                     System.out.println("\nAté logo!\n");
                     return;
                 case 1:
-                    this.getListaDeEstacionamentos().get(escolhaEst).registrarCarro(this.listaDeCarros.get(0));
+                    this.mostrarCarros();
+                    int escolhaCar = -1;
+
+                    System.out.println("Escolha o carro que deseja registrar");
+                    System.out.print("-> ");
+                    escolhaCar = in.nextInt();
+                    this.getListaDeEstacionamentos().get(escolhaEst).registrarCarro(this.listaDeCarros.get(escolhaCar));
                     break;
                 case 2:
                     this.getListaDeEstacionamentos().get(escolhaEst).mostrarCarrosNoEstacionamento();
@@ -146,15 +155,15 @@ public class Controle {
         int escolhaMenu = -1;
 
         System.out.println("\n-------------- CONTROLE DE DADOS --------------\n");
-        System.out.println("1 - Cadastrar Locatário");
-        System.out.println("2 - Cadastrar Estacionamento");
-        System.out.println("3 - Cadastrar Carro");
-        System.out.println("4 - Mostrar Locatários");
-        System.out.println("5 - Mostrar Estacionamentos");
-        System.out.println("6 - Mostrar Carros");
-        System.out.println("0 - Sair");
 
         while (true) {
+            System.out.println("\n1 - Cadastrar Locatário");
+            System.out.println("2 - Cadastrar Estacionamento");
+            System.out.println("3 - Cadastrar Carro");
+            System.out.println("4 - Mostrar Locatários");
+            System.out.println("5 - Mostrar Estacionamentos");
+            System.out.println("6 - Mostrar Carros");
+            System.out.println("0 - Voltar");
             System.out.println("\nO que deseja fazer?");
             System.out.print("-> ");
             escolhaMenu = in.nextInt();
@@ -275,11 +284,11 @@ public class Controle {
         escolhaLoc = in.nextInt();
 
         System.out.println("\n-------------- LOCATÁRIO --------------\n");
-        System.out.println("1 - Reservar Carro");
-        System.out.println("2 - Mostrar histórico");
-        System.out.println("0 - Sair");
 
         while (true) {
+            System.out.println("\n1 - Reservar Carro");
+            System.out.println("2 - Mostrar histórico");
+            System.out.println("0 - Voltar");
             System.out.println("\nO que deseja fazer?");
             System.out.print("\n-> ");
             escolhaMenu = in.nextInt();
@@ -345,12 +354,12 @@ public class Controle {
         int escolha = -1;
 
         System.out.println("\n-------------- CONTROLE --------------\n");
-        System.out.println("1 - Estacionamento");
-        System.out.println("2 - Locatário");
-        System.out.println("3 - Dados");
-        System.out.println("0 - Sair");
 
         while (true) {
+            System.out.println("\n1 - Estacionamento");
+            System.out.println("2 - Locatário");
+            System.out.println("3 - Dados");
+            System.out.println("0 - Sair");
             System.out.println("\nO que deseja controlar?");
             System.out.print("-> ");
             escolha = in.nextInt();
