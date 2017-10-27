@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Estacionamento extends PessoaJuridica{
 
     private List<Carro> carrosNoEstacionamento = new ArrayList<>();
+    private Historico historicoDeAlugueis = new Historico(false,false,true);
+
 
     public Estacionamento(String nome, String telefone, String email, String senha, String cnpj) {
         super(nome, telefone, email, senha, cnpj);
@@ -13,6 +15,7 @@ public class Estacionamento extends PessoaJuridica{
     public void registrarCarro(Carro c){
         if(!carrosNoEstacionamento.contains(c)) {
             carrosNoEstacionamento.add(c);
+            c.setEstacionamentoAtual(this);
             System.out.println(c + " " + c.getCor() + " " + c.getAno() + " registrado com sucesso!");
         } else System.out.println("Carro já registrado!");
     }
@@ -58,8 +61,11 @@ public class Estacionamento extends PessoaJuridica{
         odometro = in.nextInt();
 
         c.getAluguelDoCarro().setValorFinalDoOdometro(odometro);
+
         c.getLocatarioDoCarro().getHistoricoDeAlugueis().getListaDeAlugueis().add(c.getAluguelDoCarro());
         c.getDonoDoCarro().getHistoricoDeAlugueis().getListaDeAlugueis().add(c.getAluguelDoCarro());
+        this.historicoDeAlugueis.getListaDeAlugueis().add(c.getAluguelDoCarro());
+
         c.setEstahReservado(false);
         c.setEstahAlugado(false);
         c.setLocatarioDoCarro(null);
@@ -69,4 +75,7 @@ public class Estacionamento extends PessoaJuridica{
 
     }
 
+    public Historico getHistoricoDeAlugueis() {
+        return historicoDeAlugueis;
+    }
 }

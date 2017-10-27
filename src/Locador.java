@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Locador {
 
-    private Historico historicoDeAlugueis = new Historico(true);
+    private Historico historicoDeAlugueis = new Historico(false,true,false);
     private Pessoa pessoaLocador;
     private List<Carro> carrosDoLocador = new ArrayList<>();
 

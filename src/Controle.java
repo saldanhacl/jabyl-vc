@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -331,68 +330,6 @@ public class Controle {
         }
     }
 
-    private void controlarEstacionamento(){
-
-        int escolhaMenu;
-
-        Estacionamento estacionamentoEscolhido = escolherEstacionamento();
-
-        System.out.println("\n-------------- ESTACIONAMENTO --------------\n");
-
-
-        while (true) {
-            System.out.println("\n1 - Registrar Carro");
-            System.out.println("2 - Mostrar Carros");
-            System.out.println("3 - Alugar Carro");
-            System.out.println("4 - Retornar Carro");
-            System.out.println("0 - Voltar");
-            System.out.println("\nO que deseja fazer?");
-            System.out.print("-> ");
-            escolhaMenu = in.nextInt();
-
-            switch (escolhaMenu) {
-                case 0:
-                    System.out.println("\nVoltando...\n");
-                    return;
-                case 1:
-
-                    Locador locadorRegistrarCarro = escolherLocador();
-                    this.mostrarCarros(locadorRegistrarCarro.getCarrosDoLocador());
-
-                    System.out.println("Escolha o carro que deseja registrar");
-                    Carro carroRegistrar = escolherCarro();
-                    estacionamentoEscolhido.registrarCarro(carroRegistrar);
-
-                    break;
-                case 2:
-
-                    estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
-
-                    break;
-                case 3:
-
-                    System.out.println("Escolha o locatário que irá alugar um carro");
-                    Locatario locatarioAlugar = escolherLocatário();
-                    estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
-
-                    System.out.println("Escolha o carro que deseja alugar");
-                    Carro carroAlugar = escolherCarro();
-                    estacionamentoEscolhido.alugarCarro(locatarioAlugar, carroAlugar);
-
-                    break;
-                case 4:
-
-                    estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
-
-                    Carro carroRetornar = escolherCarro();
-                    estacionamentoEscolhido.retornarCarro(carroRetornar);
-
-                    break;
-
-            }
-        }
-    }
-
     private void controlarDados(){
 
         int escolhaMenu;
@@ -517,6 +454,63 @@ public class Controle {
                     break;
                 case 3:
                     locadorEscolhido.getCarrosDoLocador();
+                    break;
+            }
+        }
+    }
+
+    private void controlarEstacionamento(){
+
+        int escolhaMenu;
+
+        Estacionamento estacionamentoEscolhido = escolherEstacionamento();
+
+        System.out.println("\n-------------- ESTACIONAMENTO --------------\n");
+
+
+        while (true) {
+            System.out.println("\n1 - Registrar Carro");
+            System.out.println("2 - Mostrar Carros");
+            System.out.println("3 - Alugar Carro");
+            System.out.println("4 - Retornar Carro");
+            System.out.println("5 - Mostrar histórico");
+            System.out.println("0 - Voltar");
+            System.out.println("\nO que deseja fazer?");
+            System.out.print("-> ");
+            escolhaMenu = in.nextInt();
+
+            switch (escolhaMenu) {
+                case 0:
+                    System.out.println("\nVoltando...\n");
+                    return;
+                case 1:
+                    Locador locadorRegistrarCarro = escolherLocador();
+                    this.mostrarCarros(locadorRegistrarCarro.getCarrosDoLocador());
+
+                    System.out.println("Escolha o carro que deseja registrar");
+                    Carro carroRegistrar = escolherCarro();
+                    estacionamentoEscolhido.registrarCarro(carroRegistrar);
+                    break;
+                case 2:
+                    estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
+                    break;
+                case 3:
+                    System.out.println("Escolha o locatário que irá alugar um carro");
+                    Locatario locatarioAlugar = escolherLocatário();
+                    estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
+
+                    System.out.println("Escolha o carro que deseja alugar");
+                    Carro carroAlugar = escolherCarro();
+                    estacionamentoEscolhido.alugarCarro(locatarioAlugar, carroAlugar);
+                    break;
+                case 4:
+                    estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
+
+                    Carro carroRetornar = escolherCarro();
+                    estacionamentoEscolhido.retornarCarro(carroRetornar);
+                    break;
+                case 5:
+                    estacionamentoEscolhido.getHistoricoDeAlugueis().getHistorico();
                     break;
             }
         }

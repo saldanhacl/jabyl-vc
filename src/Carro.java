@@ -10,6 +10,7 @@ public class Carro {
     private Locatario locatarioDoCarro;
     private AluguelERetorno aluguelDoCarro;
     private Locador donoDoCarro;
+    private Estacionamento estacionamentoAtual;
 
     public Carro(String placa, String cor, String ano, String modelo) {
         this.placa = placa;
@@ -81,5 +82,13 @@ public class Carro {
     public String getEstahReservado() {
         if (this.estahReservado) return "Sim";
         else return "Não";
+    }
+
+    public Estacionamento getEstacionamentoAtual() {
+        return estacionamentoAtual;
+    }
+
+    public void setEstacionamentoAtual(Estacionamento estacionamentoAtual) {
+        this.estacionamentoAtual = estacionamentoAtual;
     }
 }

@@ -1,7 +1,7 @@
 public class Locatario extends PessoaFisica{
 
     private String cnh;
-    private Historico historicoDeAlugueis = new Historico(false);
+    private Historico historicoDeAlugueis = new Historico(true,false,false);
 
     public Locatario(String nome, String telefone, String email, String senha,
                      String cpf, String rg, String sobrenome, String dataDeNascimento,
