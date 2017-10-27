@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -45,6 +46,7 @@ public class Estacionamento extends PessoaJuridica{
         odometro = in.nextInt();
 
         AluguelERetorno a = new AluguelERetorno(c,l,odometro);
+        a.setDataDoAlguel(new Date());
         c.setAluguelDoCarro(a);
         System.out.println("\n*********Carro alugado com sucesso!************\n");
 
@@ -59,6 +61,8 @@ public class Estacionamento extends PessoaJuridica{
         System.out.println("Digite o valor final do odômetro: ");
         System.out.print("-> ");
         odometro = in.nextInt();
+
+        c.getAluguelDoCarro().setDataDoRetorno(new Date());
 
         c.getAluguelDoCarro().setValorFinalDoOdometro(odometro);
 
