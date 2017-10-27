@@ -1,4 +1,3 @@
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +136,6 @@ public class Controle {
 
             Locador locadorCadastrar = new Locador(p);
             this.cadastrarLocador(locadorCadastrar);
-
         }
     }
 
