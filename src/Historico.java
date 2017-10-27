@@ -26,7 +26,4 @@ public class Historico {
         return listaDeAlugueis;
     }
 
-    public boolean getEhLocador() {
-        return ehLocador;
-    }
 }

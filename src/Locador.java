@@ -33,23 +33,12 @@ public class Locador {
         return historicoDeAlugueis;
     }
 
-    public void setHistoricoDeAlugueis(Historico historicoDeAlugueis) {
-        this.historicoDeAlugueis = historicoDeAlugueis;
-    }
-
     public Pessoa getPessoaLocador() {
         return pessoaLocador;
-    }
-
-    public void setPessoaLocador(Pessoa pessoaLocador) {
-        this.pessoaLocador = pessoaLocador;
     }
 
     public List<Carro> getCarrosDoLocador() {
         return carrosDoLocador;
     }
 
-    public void setCarrosDoLocador(List<Carro> carrosDoLocador) {
-        this.carrosDoLocador = carrosDoLocador;
-    }
 }

@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Locatario extends PessoaFisica{
 
     private String cnh;
@@ -13,17 +10,8 @@ public class Locatario extends PessoaFisica{
         this.cnh = cnh;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
     public String getCnh() {
         return cnh;
-    }
-
-    public void setCnh(String cnh) {
-        this.cnh = cnh;
     }
 
     public Historico getHistoricoDeAlugueis() {

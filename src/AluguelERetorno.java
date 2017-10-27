@@ -21,14 +21,6 @@ public class AluguelERetorno {
         return locatarioAlugando;
     }
 
-    public int getValorIncialDoOdometro() {
-        return valorIncialDoOdometro;
-    }
-
-    public int getValorFinalDoOdometro() {
-        return valorFinalDoOdometro;
-    }
-
     public void setValorFinalDoOdometro(int valorFinalDoOdometro) {
         this.valorFinalDoOdometro = valorFinalDoOdometro;
     }

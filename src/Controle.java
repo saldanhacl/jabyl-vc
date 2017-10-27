@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 public class Controle {
 
-    static Scanner in = new Scanner(System.in);
-    List<Locatario> listaDeLocatarios = new ArrayList<>();
-    List<Locador> listaDeLocadores = new ArrayList<>();
-    List<Estacionamento> listaDeEstacionamentos = new ArrayList<>();
-    List<Carro> listaDeCarros = new ArrayList<>();
+    private static Scanner in = new Scanner(System.in);
+    private List<Locatario> listaDeLocatarios = new ArrayList<>();
+    private List<Locador> listaDeLocadores = new ArrayList<>();
+    private List<Estacionamento> listaDeEstacionamentos = new ArrayList<>();
+    private List<Carro> listaDeCarros = new ArrayList<>();
 
-    public void cadastrarLocatario(Locatario l){
+    private void cadastrarLocatario(Locatario l){
 
         if(!listaDeLocatarios.contains(l)) {
             listaDeLocatarios.add(l);
@@ -20,7 +20,7 @@ public class Controle {
 
     }
 
-    public void cadastrarLocatario(){
+    private void cadastrarLocatario(){
 
         System.out.println("\n-------------- CADASTRO DE LOCATÁRIO --------------\n");
 
@@ -57,7 +57,7 @@ public class Controle {
         this.cadastrarLocatario(locCadastrar);
     }
 
-    public void cadastrarLocador(Locador l){
+    private void cadastrarLocador(Locador l){
 
         if(!listaDeLocadores.contains(l)) {
             listaDeLocadores.add(l);
@@ -66,9 +66,9 @@ public class Controle {
 
     }
 
-    public void cadastrarLocador(){
+    private void cadastrarLocador(){
 
-        int escolhaPessoa = -1;
+        int escolhaPessoa;
 
         System.out.println("Escolha o tipo de pessoa do Locador");
         System.out.println("1 - Pessoa Física");
@@ -122,7 +122,7 @@ public class Controle {
             String cnpjLocador;
 
             System.out.print("\nNome: ");
-            nomeLocador = in.next();;
+            nomeLocador = in.next();
             System.out.print("Telefone: ");
             telefoneLocador = in.next();
             System.out.print("Email: ");
@@ -139,7 +139,7 @@ public class Controle {
         }
     }
 
-    public void cadastrarEstacionamento(Estacionamento e){
+    private void cadastrarEstacionamento(Estacionamento e){
 
         if(!listaDeEstacionamentos.contains(e)) {
             listaDeEstacionamentos.add(e);
@@ -148,7 +148,7 @@ public class Controle {
 
     }
 
-    public void cadastrarEstacionamento(){
+    private void cadastrarEstacionamento(){
 
         System.out.println("\n-------------- CADASTRO DE ESTACIONAMENTO --------------\n");
 
@@ -175,7 +175,7 @@ public class Controle {
 
     }
 
-    public void cadastrarCarroNosDados(Carro c){
+    private void cadastrarCarroNosDados(Carro c){
         if(!listaDeCarros.contains(c)) {
             listaDeCarros.add(c);
             System.out.println("Carro " + c + " cadastrado nos dados com sucesso!");
@@ -183,9 +183,9 @@ public class Controle {
 
     }
 
-    public Locatario escolherLocatário(){
+    private Locatario escolherLocatário(){
 
-        int escolhaLocatario = -1;
+        int escolhaLocatario;
 
         System.out.println("Digite o ID do Locatário");
         System.out.print("-> ");
@@ -197,9 +197,9 @@ public class Controle {
 
     }
 
-    public Locador escolherLocador(){
+    private Locador escolherLocador(){
 
-        int escolhaLocador = -1;
+        int escolhaLocador;
 
         System.out.println("Digite o ID do Locador");
         System.out.print("-> ");
@@ -211,9 +211,9 @@ public class Controle {
 
     }
 
-    public Carro escolherCarro(){
+    private Carro escolherCarro(){
 
-        int escolhaCarro = -1;
+        int escolhaCarro;
 
         System.out.println("Digite o ID do Carro");
         System.out.print("-> ");
@@ -225,9 +225,9 @@ public class Controle {
 
     }
 
-    public Estacionamento escolherEstacionamento(){
+    private Estacionamento escolherEstacionamento(){
 
-        int escolhaEstacionamento = -1;
+        int escolhaEstacionamento;
 
         System.out.println("Digite o ID do Estacionamento");
         System.out.print("-> ");
@@ -239,7 +239,7 @@ public class Controle {
 
     }
 
-    public Carro cadastrarCarro(){
+    private Carro cadastrarCarro(){
         System.out.println("\n-------------- CADASTRO DE CARRO --------------\n");
 
         String placa;
@@ -262,7 +262,7 @@ public class Controle {
         return carCadastrar;
     }
 
-    public void mostrarCarros(List<Carro> listaDeCarros){
+    private void mostrarCarros(List<Carro> listaDeCarros){
         System.out.println("\n---------- CARROS ----------\n");
         for (Carro  c : listaDeCarros) {
             System.out.println("ID #" + listaDeCarros.indexOf(c));
@@ -277,7 +277,7 @@ public class Controle {
         }
     }
 
-    public void mostrarLocatarios(){
+    private void mostrarLocatarios(){
 
         System.out.println("\n---------- LOCATÁRIOS ----------\n");
         for (Locatario l : listaDeLocatarios) {
@@ -293,7 +293,7 @@ public class Controle {
         }
     }
 
-    public void mostrarLocadores(){
+    private void mostrarLocadores(){
 
         System.out.println("\n---------- LOCADORES ----------\n");
 
@@ -318,7 +318,7 @@ public class Controle {
         }
     }
 
-    public void mostrarEstacionamentos(){
+    private void mostrarEstacionamentos(){
 
         System.out.println("\n---------- ESTACIONAMENTOS ----------\n");
         for (Estacionamento e : listaDeEstacionamentos) {
@@ -331,9 +331,9 @@ public class Controle {
         }
     }
 
-    public void controlarEstacionamento(){
+    private void controlarEstacionamento(){
 
-        int escolhaMenu = -1;
+        int escolhaMenu;
 
         Estacionamento estacionamentoEscolhido = escolherEstacionamento();
 
@@ -393,9 +393,9 @@ public class Controle {
         }
     }
 
-    public void controlarDados(){
+    private void controlarDados(){
 
-        int escolhaMenu = -1;
+        int escolhaMenu;
 
         System.out.println("\n-------------- CONTROLE DE DADOS --------------\n");
 
@@ -443,9 +443,9 @@ public class Controle {
         }
     }
 
-    public void controlarLocatario(){
+    private void controlarLocatario(){
 
-        int escolhaMenu = -1;
+        int escolhaMenu;
 
         Locatario locatarioEscolhido = escolherLocatário();
 
@@ -485,9 +485,9 @@ public class Controle {
     }
 
 
-    public void controlarLocador(){
+    private void controlarLocador(){
 
-        int escolhaMenu = -1;
+        int escolhaMenu;
 
         Locador locadorEscolhido = escolherLocador();
 
@@ -522,19 +522,19 @@ public class Controle {
         }
     }
 
-    public List<Locatario> getListaDeLocatarios() {
+    private List<Locatario> getListaDeLocatarios() {
         return listaDeLocatarios;
     }
 
-    public List<Estacionamento> getListaDeEstacionamentos() {
+    private List<Estacionamento> getListaDeEstacionamentos() {
         return listaDeEstacionamentos;
     }
 
-    public List<Carro> getListaDeCarros() {
+    private List<Carro> getListaDeCarros() {
         return listaDeCarros;
     }
 
-    public List<Locador> getListaDeLocadores() {
+    private List<Locador> getListaDeLocadores() {
         return listaDeLocadores;
     }
 
@@ -587,7 +587,7 @@ public class Controle {
         c.cadastrarLocador(loc2);
         c.cadastrarLocador(loc3);
 
-        int escolha = -1;
+        int escolha;
 
         System.out.println("\n-------------- CONTROLE --------------\n");
 

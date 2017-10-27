@@ -69,13 +69,4 @@ public class Estacionamento extends PessoaJuridica{
 
     }
 
-    public List<Carro> getCarrosNoEstacionamento() {
-        return carrosNoEstacionamento;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
 }
