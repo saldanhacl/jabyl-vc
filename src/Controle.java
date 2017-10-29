@@ -375,7 +375,8 @@ public class Controle {
                 case 7:
                     this.mostrarCarros(this.listaDeCarros);
                     break;
-
+                default:
+                    System.out.println("\nOpção inválida!");
             }
         }
     }
@@ -417,6 +418,8 @@ public class Controle {
                 case 2:
                     locatarioEscolhido.getHistoricoDeAlugueis().getHistorico();
                     break;
+                default:
+                    System.out.println("\nOpção inválida!");
             }
         }
     }
@@ -455,6 +458,8 @@ public class Controle {
                 case 3:
                     locadorEscolhido.getCarrosDoLocador();
                     break;
+                default:
+                    System.out.println("\nOpção inválida!");
             }
         }
     }
@@ -512,6 +517,8 @@ public class Controle {
                 case 5:
                     estacionamentoEscolhido.getHistoricoDeAlugueis().getHistorico();
                     break;
+                default:
+                    System.out.println("\nOpção inválida!");
             }
         }
     }
@@ -612,6 +619,8 @@ public class Controle {
                 case 4:
                     c.controlarDados();
                     break;
+                default:
+                    System.out.println("\nOpção inválida!");
             }
         }
     }
