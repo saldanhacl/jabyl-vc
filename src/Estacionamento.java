@@ -1,3 +1,7 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,19 +25,28 @@ public class Estacionamento extends PessoaJuridica{
         } else System.out.println("Carro já registrado!");
     }
 
-    public void mostrarCarrosNoEstacionamento(){
-        System.out.println("\n---------- CARROS ----------\n");
-        for (Carro  c : carrosNoEstacionamento) {
-            System.out.println("Carro #" + carrosNoEstacionamento.indexOf(c));
-            System.out.println("Dono: " + c.getDonoDoCarro().getPessoaLocador());
-            System.out.println("Modelo: " + c.getModelo());
-            System.out.println("Cor: " + c.getCor());
-            System.out.println("Ano: " + c.getAno());
-            System.out.println("Placa: " + c.getPlaca());
-            System.out.println("Em aluguel: " + c.getEmAluguel());
-            System.out.println("Reservado: " + c.getEstahReservado());
-            System.out.println("\n---------------------------------\n");
+    public void mostrarCarrosNoEstacionamento(PrintStream body){
+
+        JSONArray json = new JSONArray();
+
+        for (Carro c : carrosNoEstacionamento){
+            json.put(c.toJson());
         }
+
+        body.println(json);
+
+//        System.out.println("\n---------- CARROS ----------\n");
+//        for (Carro  c : carrosNoEstacionamento) {
+//            System.out.println("Carro #" + carrosNoEstacionamento.indexOf(c));
+//            System.out.println("Dono: " + c.getDonoDoCarro().getPessoaLocador());
+//            System.out.println("Modelo: " + c.getModelo());
+//            System.out.println("Cor: " + c.getCor());
+//            System.out.println("Ano: " + c.getAno());
+//            System.out.println("Placa: " + c.getPlaca());
+//            System.out.println("Em aluguel: " + c.getEmAluguel());
+//            System.out.println("Reservado: " + c.getEstahReservado());
+//            System.out.println("\n---------------------------------\n")
+//          }
     }
 
     public void alugarCarro(Locatario l, Carro c){

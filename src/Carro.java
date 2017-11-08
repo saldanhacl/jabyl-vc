@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 public class Carro {
 
     private String placa;
@@ -91,4 +93,20 @@ public class Carro {
     public void setEstacionamentoAtual(Estacionamento estacionamentoAtual) {
         this.estacionamentoAtual = estacionamentoAtual;
     }
+
+    public JSONObject toJson(){
+
+        JSONObject json = new JSONObject();
+
+        json.put("Dono", this.donoDoCarro);
+        json.put("Modelo", this.modelo);
+        json.put("Placa", this.placa);
+        json.put("Ano", this.ano);
+        json.put("Cor", this.cor);
+        json.put("Alugado", this.estahAlugado);
+        json.put("Reservado", this.estahReservado);
+
+        return json;
+    }
+
 }

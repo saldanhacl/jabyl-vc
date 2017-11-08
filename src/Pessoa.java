@@ -29,4 +29,13 @@ public class Pessoa {
         return email;
     }
 
+    public boolean autenticar(String email, String senha){
+        if (this.email.equals(email) && this.senha.equals(senha)){
+            return true;
+        } else return false;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
 }

@@ -17,7 +17,7 @@ public class Locador {
 
     @Override
     public String toString() {
-        if (this.pessoaLocador instanceof PessoaFisica) return pessoaLocador + " " + ((PessoaFisica)pessoaLocador).getSobrenome();
+        if (this.pessoaLocador instanceof PessoaFisica) return pessoaLocador + "";
         else return pessoaLocador.getNome();
     }
 

@@ -1,3 +1,6 @@
+import org.json.JSONObject;
+
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -405,7 +408,7 @@ public class Controle {
                 case 1:
                     System.out.println("Escolha um estacionamento");
                     Estacionamento estacionamentoReservarCarro = escolherEstacionamento();
-                    estacionamentoReservarCarro.mostrarCarrosNoEstacionamento();
+                    //estacionamentoReservarCarro.mostrarCarrosNoEstacionamento();
 
                     System.out.println("Escolha um carro para reservar");
                     Carro carroReservar = escolherCarro();
@@ -497,19 +500,19 @@ public class Controle {
                     estacionamentoEscolhido.registrarCarro(carroRegistrar);
                     break;
                 case 2:
-                    estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
+                   // estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
                     break;
                 case 3:
                     System.out.println("Escolha o locatário que irá alugar um carro");
                     Locatario locatarioAlugar = escolherLocatário();
-                    estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
+                   // estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
 
                     System.out.println("Escolha o carro que deseja alugar");
                     Carro carroAlugar = escolherCarro();
                     estacionamentoEscolhido.alugarCarro(locatarioAlugar, carroAlugar);
                     break;
                 case 4:
-                    estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
+                    //estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
 
                     Carro carroRetornar = escolherCarro();
                     estacionamentoEscolhido.retornarCarro(carroRetornar);
@@ -523,23 +526,58 @@ public class Controle {
         }
     }
 
-    private List<Locatario> getListaDeLocatarios() {
+    public void validarUsuario(PrintStream body, String email, String senha){
+
+        JSONObject json = new JSONObject();
+        String tipo = "";
+        String status = "Email ou senha incorretos";
+
+        for (Locatario l : listaDeLocatarios){
+            if (l.autenticar(email,senha)) {
+                status = "OK";
+                tipo = "locatario";
+            }
+        }
+
+        for (Estacionamento e : listaDeEstacionamentos){
+            if (e.autenticar(email,senha)) {
+                status = "OK";
+                tipo = "estacionamento";
+            }
+        }
+
+        for (Locador l : listaDeLocadores){
+            if (l.getPessoaLocador().autenticar(email,senha)) {
+                status = "OK";
+                tipo = "locador";
+            }
+        }
+
+        json.put("status", status);
+        json.put("tipo", tipo);
+        json.put("operacao", "realizarLogin");
+
+        body.println(json);
+
+    }
+
+    public List<Locatario> getListaDeLocatarios() {
         return listaDeLocatarios;
     }
 
-    private List<Estacionamento> getListaDeEstacionamentos() {
+    public List<Estacionamento> getListaDeEstacionamentos() {
         return listaDeEstacionamentos;
     }
 
-    private List<Carro> getListaDeCarros() {
+    public List<Carro> getListaDeCarros() {
         return listaDeCarros;
     }
 
-    private List<Locador> getListaDeLocadores() {
+    public List<Locador> getListaDeLocadores() {
         return listaDeLocadores;
     }
 
-    public static void main(String[] args) {
+    public Controle iniciarControle() {
 
         Controle c = new Controle();
 
@@ -558,10 +596,10 @@ public class Controle {
                 ,"94604268637"));
 
         PessoaFisica p1 = new PessoaFisica("Stefany", "31987103842", "stefany@gmail.com", "YJGgnCdM2a",
-                                            "14995895655", "253400041", "Cavalcanti", "21/04/1995");
+                "14995895655", "253400041", "Cavalcanti", "21/04/1995");
 
-        PessoaFisica p2 = new PessoaFisica("César", "34988244706", "cesar@gmail.com", "0i3sUJr8BE",
-                "87296830689", "288296102", "Araújo", "02/06/1995");
+        PessoaFisica p2 = new PessoaFisica("Cesar", "34988244706", "cesar@gmail.com", "0i3sUJr8BE",
+                "87296830689", "288296102", "Araujo", "02/06/1995");
 
         PessoaJuridica pj = new PessoaJuridica("PUCMG", "31987424764", "puc@gmail.com", "1234", "34773391000107");
 
@@ -588,41 +626,48 @@ public class Controle {
         c.cadastrarLocador(loc2);
         c.cadastrarLocador(loc3);
 
-        int escolha;
+        c.getListaDeEstacionamentos().get(0).registrarCarro(c1);
+        c.getListaDeEstacionamentos().get(0).registrarCarro(c2);
+        c.getListaDeEstacionamentos().get(0).registrarCarro(c3);
+        c.getListaDeEstacionamentos().get(0).registrarCarro(c4);
 
-        System.out.println("\n-------------- CONTROLE --------------\n");
 
-        while (true) {
-            System.out.println("\n1 - Estacionamento");
-            System.out.println("2 - Locatário");
-            System.out.println("3 - Locador");
-            System.out.println("4 - Dados");
-            System.out.println("0 - Sair");
-            System.out.println("\nO que deseja controlar?");
-            System.out.print("-> ");
-            escolha = in.nextInt();
-
-            switch (escolha) {
-
-                case 0:
-                    System.out.println("\nAté logo!\n");
-                    return;
-                case 1:
-                    c.controlarEstacionamento();
-                    break;
-                case 2:
-                    c.controlarLocatario();
-                    break;
-                case 3:
-                    c.controlarLocador();
-                    break;
-                case 4:
-                    c.controlarDados();
-                    break;
-                default:
-                    System.out.println("\nOpção inválida!");
-            }
-        }
+        return c;
+//        int escolha;
+//
+//        System.out.println("\n-------------- CONTROLE --------------\n");
+//
+//        while (true) {
+//            System.out.println("\n1 - Estacionamento");
+//            System.out.println("2 - Locatário");
+//            System.out.println("3 - Locador");
+//            System.out.println("4 - Dados");
+//            System.out.println("0 - Sair");
+//            System.out.println("\nO que deseja controlar?");
+//            System.out.print("-> ");
+//            escolha = in.nextInt();
+//
+//            switch (escolha) {
+//
+//                case 0:
+//                    System.out.println("\nAté logo!\n");
+//                    return;
+//                case 1:
+//                    c.controlarEstacionamento();
+//                    break;
+//                case 2:
+//                    c.controlarLocatario();
+//                    break;
+//                case 3:
+//                    c.controlarLocador();
+//                    break;
+//                case 4:
+//                    c.controlarDados();
+//                    break;
+//                default:
+//                    System.out.println("\nOpção inválida!");
+//            }
+//        }
     }
 
 }
