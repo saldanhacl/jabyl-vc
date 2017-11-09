@@ -35,18 +35,6 @@ public class Estacionamento extends PessoaJuridica{
 
         body.println(json);
 
-//        System.out.println("\n---------- CARROS ----------\n");
-//        for (Carro  c : carrosNoEstacionamento) {
-//            System.out.println("Carro #" + carrosNoEstacionamento.indexOf(c));
-//            System.out.println("Dono: " + c.getDonoDoCarro().getPessoaLocador());
-//            System.out.println("Modelo: " + c.getModelo());
-//            System.out.println("Cor: " + c.getCor());
-//            System.out.println("Ano: " + c.getAno());
-//            System.out.println("Placa: " + c.getPlaca());
-//            System.out.println("Em aluguel: " + c.getEmAluguel());
-//            System.out.println("Reservado: " + c.getEstahReservado());
-//            System.out.println("\n---------------------------------\n")
-//          }
     }
 
     public void alugarCarro(Locatario l, Carro c){

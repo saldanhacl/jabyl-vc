@@ -40,6 +40,7 @@ public class Server implements Container{
                     break;
                 case "realizarLogin":
                     c.validarUsuario(body,query.get("email"),query.get("senha"));
+                    break;
             }
 
             body.close();

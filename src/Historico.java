@@ -1,3 +1,7 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +19,17 @@ public class Historico {
         this.ehLocatario = ehLocatario;
         this.ehLocador = ehLocador;
         this.ehEstacionamento = ehEstacionamento;
+    }
+
+    public void mostrarHistorico(PrintStream body){
+
+        JSONArray json = new JSONArray();
+
+        for (AluguelERetorno a : listaDeAlugueis){
+            json.put(a.toJSON());
+        }
+
+        body.println(json);
     }
 
     public void getHistorico(){
