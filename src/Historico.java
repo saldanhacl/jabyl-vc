@@ -32,26 +32,6 @@ public class Historico {
         body.println(json);
     }
 
-    public void getHistorico(){
-        System.out.println("\n--------- HISTÓRICO ----------\n");
-        for (AluguelERetorno a : listaDeAlugueis){
-            if (!ehLocatario){
-                System.out.println("Locatário: " + a.getLocatarioAlugando());
-            }
-            if (!ehLocador){
-                System.out.println("Locador: " + a.getCarroAlugado().getDonoDoCarro());
-            }
-            if (!ehEstacionamento){
-                System.out.println("Estacionamento: " + a.getCarroAlugado().getEstacionamentoAtual());
-            }
-            System.out.println("Carro alugado: " + a.getCarroAlugado());
-            System.out.println("Distância percorrida: " + a.getDistanciaPercorrida());
-            System.out.println("Data do aluguel: " + dateFormat.format(a.getDataDoAlguel()));
-            System.out.println("Data do retorno: " + dateFormat.format(a.getDataDoRetorno()));
-            System.out.println("\n----------------------------------\n");
-        }
-    }
-
     public List<AluguelERetorno> getListaDeAlugueis() {
         return listaDeAlugueis;
     }

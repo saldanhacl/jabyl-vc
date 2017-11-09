@@ -419,7 +419,7 @@ public class Controle {
                     }
                     break;
                 case 2:
-                    locatarioEscolhido.getHistoricoDeAlugueis().getHistorico();
+                   // locatarioEscolhido.getHistoricoDeAlugueis().getHistorico();
                     break;
                 default:
                     System.out.println("\nOpção inválida!");
@@ -456,7 +456,7 @@ public class Controle {
                     this.cadastrarCarroNosDados(carroCadastrado);
                     break;
                 case 2:
-                    locadorEscolhido.getHistoricoDeAlugueis().getHistorico();
+                   // locadorEscolhido.getHistoricoDeAlugueis().getHistorico();
                     break;
                 case 3:
                     locadorEscolhido.getCarrosDoLocador();
@@ -509,16 +509,16 @@ public class Controle {
 
                     System.out.println("Escolha o carro que deseja alugar");
                     Carro carroAlugar = escolherCarro();
-                    estacionamentoEscolhido.alugarCarro(locatarioAlugar, carroAlugar);
+                    //estacionamentoEscolhido.alugarCarro(locatarioAlugar, carroAlugar);
                     break;
                 case 4:
                     //estacionamentoEscolhido.mostrarCarrosNoEstacionamento();
 
                     Carro carroRetornar = escolherCarro();
-                    estacionamentoEscolhido.retornarCarro(carroRetornar);
+                  //  estacionamentoEscolhido.retornarCarro(carroRetornar);
                     break;
                 case 5:
-                    estacionamentoEscolhido.getHistoricoDeAlugueis().getHistorico();
+                 //   estacionamentoEscolhido.getHistoricoDeAlugueis().getHistorico();
                     break;
                 default:
                     System.out.println("\nOpção inválida!");
@@ -587,9 +587,11 @@ public class Controle {
         c.cadastrarEstacionamento(new Estacionamento("EstAqui", "34988754087", "estaqui@gmail.com", "1234",
                 "81453227000194"));
 
-        c.cadastrarLocatario(new Locatario("Danilo", "38982741538", "danilo@gmail.com","1234",
+        Locatario l1 = new Locatario("Danilo", "38982741538", "danilo@gmail.com","1234",
                 "11762914670", "310554019", "Silva", "07/06/1996"
-                ,"94604268637"));
+                ,"94604268637");
+
+        c.cadastrarLocatario(l1);
 
         c.cadastrarLocatario(new Locatario("Gabriel", "32992321210", "gabriel@gmail.com","1234",
                 "24212742659", "135189718", "Martins", "12/02/1995"
@@ -630,6 +632,15 @@ public class Controle {
         c.getListaDeEstacionamentos().get(0).registrarCarro(c2);
         c.getListaDeEstacionamentos().get(0).registrarCarro(c3);
         c.getListaDeEstacionamentos().get(0).registrarCarro(c4);
+
+        c.getListaDeEstacionamentos().get(0).alugarCarro(l1,c1,100);
+        c.getListaDeEstacionamentos().get(0).retornarCarro(c1,200);
+        c.getListaDeEstacionamentos().get(0).alugarCarro(l1,c2,10);
+        c.getListaDeEstacionamentos().get(0).retornarCarro(c2,50);
+        c.getListaDeEstacionamentos().get(0).alugarCarro(l1,c3,32);
+        c.getListaDeEstacionamentos().get(0).retornarCarro(c3,48);
+        c.getListaDeEstacionamentos().get(0).alugarCarro(l1,c1,1456);
+        c.getListaDeEstacionamentos().get(0).retornarCarro(c1,1480);
 
 
         return c;

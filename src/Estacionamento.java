@@ -37,35 +37,18 @@ public class Estacionamento extends PessoaJuridica{
 
     }
 
-    public void alugarCarro(Locatario l, Carro c){
+    public void alugarCarro(Locatario l, Carro c, int odometroInicial){
 
-        Scanner in = new Scanner(System.in);
-        int odometro;
-
-        System.out.println("Digite o valor inicial do odômetro: ");
-        System.out.print("-> ");
-        odometro = in.nextInt();
-
-        AluguelERetorno a = new AluguelERetorno(c,l,odometro);
+        AluguelERetorno a = new AluguelERetorno(c,l,odometroInicial);
         a.setDataDoAlguel(new Date());
         c.setAluguelDoCarro(a);
-        System.out.println("\n*********Carro alugado com sucesso!************\n");
 
     }
 
-    public void retornarCarro(Carro c){
-
-        Scanner in = new Scanner(System.in);
-
-        int odometro;
-
-        System.out.println("Digite o valor final do odômetro: ");
-        System.out.print("-> ");
-        odometro = in.nextInt();
+    public void retornarCarro(Carro c, int odometroFinal){
 
         c.getAluguelDoCarro().setDataDoRetorno(new Date());
-
-        c.getAluguelDoCarro().setValorFinalDoOdometro(odometro);
+        c.getAluguelDoCarro().setValorFinalDoOdometro(odometroFinal);
 
         c.getLocatarioDoCarro().getHistoricoDeAlugueis().getListaDeAlugueis().add(c.getAluguelDoCarro());
         c.getDonoDoCarro().getHistoricoDeAlugueis().getListaDeAlugueis().add(c.getAluguelDoCarro());
@@ -74,9 +57,6 @@ public class Estacionamento extends PessoaJuridica{
         c.setEstahReservado(false);
         c.setEstahAlugado(false);
         c.setLocatarioDoCarro(null);
-
-        System.out.println("\n*********Carro retornado com sucesso!************\n");
-
 
     }
 

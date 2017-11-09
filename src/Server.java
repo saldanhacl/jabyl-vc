@@ -41,6 +41,8 @@ public class Server implements Container{
                 case "realizarLogin":
                     c.validarUsuario(body,query.get("email"),query.get("senha"));
                     break;
+                case "mostrarHistorico":
+                    c.getListaDeEstacionamentos().get(0).getHistoricoDeAlugueis().mostrarHistorico(body);
             }
 
             body.close();
