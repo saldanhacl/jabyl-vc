@@ -6,7 +6,6 @@ public class Carro {
     private String cor;
     private String ano;
     private String modelo;
-    private String idRegistro;
     private boolean estahAlugado;
     private boolean estahReservado;
     private Locatario locatarioDoCarro;

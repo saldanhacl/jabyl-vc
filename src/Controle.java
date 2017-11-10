@@ -102,6 +102,8 @@ public class Controle {
 
     public Controle iniciarControle() {
 
+        //Dados iniciados manutalmente para teste
+
         Controle c = new Controle();
 
         c.cadastrarEstacionamento(new Estacionamento("Park", "31992006338", "park@gmail.com", "1234",

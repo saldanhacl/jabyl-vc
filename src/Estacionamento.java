@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Estacionamento extends PessoaJuridica{
 
     private List<Carro> carrosNoEstacionamento = new ArrayList<>();
-    private Historico historicoDeAlugueis = new Historico(false,false,true);
+    private Historico historicoDeAlugueis = new Historico();
 
 
     public Estacionamento(String nome, String telefone, String email, String senha, String cnpj) {
