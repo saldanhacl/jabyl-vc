@@ -46,7 +46,7 @@ public class Carro {
 
     public String getEmAluguel() {
         if (this.estahAlugado) return "Sim";
-        else return "Não";
+        else return "Nao";
     }
 
     public Locador getDonoDoCarro() {
@@ -83,7 +83,7 @@ public class Carro {
 
     public String getEstahReservado() {
         if (this.estahReservado) return "Sim";
-        else return "Não";
+        else return "Nao";
     }
 
     public Estacionamento getEstacionamentoAtual() {
@@ -103,8 +103,8 @@ public class Carro {
         json.put("Placa", this.placa);
         json.put("Ano", this.ano);
         json.put("Cor", this.cor);
-        json.put("Alugado", this.estahAlugado);
-        json.put("Reservado", this.estahReservado);
+        json.put("Alugado", this.getEmAluguel());
+        json.put("Reservado", this.getEstahReservado());
 
         return json;
     }
