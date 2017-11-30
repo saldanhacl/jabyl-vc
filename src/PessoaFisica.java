@@ -1,9 +1,12 @@
-public class PessoaFisica extends Pessoa{
+public class PessoaFisica extends Usuario {
 
     private String cpf;
     private String rg;
     private String sobrenome;
     private String dataDeNascimento;
+
+    public PessoaFisica() {
+    }
 
     public PessoaFisica(String nome, String telefone, String email, String senha,
                         String cpf, String rg, String sobrenome, String dataDeNascimento) {

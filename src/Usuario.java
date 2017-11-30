@@ -1,11 +1,15 @@
-public class Pessoa {
+public class Usuario {
 
+    private Historico historicoDeAlugueis = new Historico();
     private String nome;
     private String telefone;
     private String email;
     private String senha;
 
-    public Pessoa(String nome, String telefone, String email, String senha) {
+    public Usuario() {
+    }
+
+    public Usuario(String nome, String telefone, String email, String senha) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -35,7 +39,8 @@ public class Pessoa {
         } else return false;
     }
 
-    public String getSenha() {
-        return senha;
+    public Historico getHistoricoDeAlugueis() {
+        return historicoDeAlugueis;
     }
+
 }

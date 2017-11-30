@@ -1,6 +1,9 @@
-public class PessoaJuridica extends Pessoa{
+public class PessoaJuridica extends Usuario {
 
     private String cnpj;
+
+    public PessoaJuridica() {
+    }
 
     public PessoaJuridica(String nome, String telefone, String email, String senha,
                           String cnpj) {

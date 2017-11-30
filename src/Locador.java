@@ -1,13 +1,18 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Locador {
+public class Locador{
 
-    private Historico historicoDeAlugueis = new Historico();
-    private Pessoa pessoaLocador;
     private List<Carro> carrosDoLocador = new ArrayList<>();
+    private Usuario pessoaLocador;
 
-    public Locador(PessoaFisica pessoaLocador) {
+    public Locador() {
+    }
+        public Locador(PessoaFisica pessoaLocador) {
         this.pessoaLocador = pessoaLocador;
     }
 
@@ -22,23 +27,52 @@ public class Locador {
     }
 
     public void cadastrarCarro(Carro c){
-        if(!carrosDoLocador.contains(c)) {
+        if(!this.carrosDoLocador.contains(c)) {
             c.setDonoDoCarro(this);
-            carrosDoLocador.add(c);
+            this.carrosDoLocador.add(c);
             System.out.println(c + " " + c.getCor() + " " + c.getAno() + " cadastrado(a) com sucesso!");
         } else System.out.println("Carro já cadastrado!");
     }
 
-    public Historico getHistoricoDeAlugueis() {
-        return historicoDeAlugueis;
+    public void cadastrarCarro(PrintStream body, Carro c){
+
+        JSONObject json = new JSONObject();
+        String status = "Carro ja registrado...";
+
+        if(!this.carrosDoLocador.contains(c)) {
+            c.setDonoDoCarro(this);
+            this.carrosDoLocador.add(c);
+            status = "Carro registrado com sucesso";
+        }
+
+        json.put("status", status);
+
+        body.println(json);
+
     }
 
-    public Pessoa getPessoaLocador() {
+
+    public Usuario getPessoaLocador() {
         return pessoaLocador;
+    }
+
+    public void mostrarCarrosLocador(PrintStream body) {
+
+        JSONArray json = new JSONArray();
+
+        for (Carro c : carrosDoLocador) {
+            System.out.println(c);
+            json.put(c.toJson());
+        }
+
+        body.println(json);
+    }
+
+    public void setPessoaLocador(Usuario pessoaLocador) {
+        this.pessoaLocador = pessoaLocador;
     }
 
     public List<Carro> getCarrosDoLocador() {
         return carrosDoLocador;
     }
-
 }

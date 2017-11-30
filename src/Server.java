@@ -35,14 +35,65 @@ public class Server implements Container{
             }
 
             switch (operacao){
+
+                case "removerCarro":
+                    Estacionamento estRemover = c.pesquisarEstacionamento(query.get("email"));
+                    Carro carroRemovido = c.pesquisaCarro(query.get("placa"));
+                    estRemover.removerCarro(body, carroRemovido);
+                    break;
+                case "reservarCarro":
+                    Carro carReservar = c.pesquisaCarro(query.get("placa"));
+                    carReservar.setEstahReservado(body, true);
+                    break;
+                case "registrarCarroLocador":
+                    Carro novoCarro = new Carro(query.get("placa"), query.get("cor"), query.get("ano"), query.get("modelo"));
+                    Locador l = c.pesquisarLocador(query.get("email"));
+                    c.cadastrarCarroNosDados(body,l,novoCarro);
+                    break;
+                case "alugarCarro":
+                    Locatario locAlugar = c.pesquisarLocatario(query.get("emailLocatario"));
+                    Estacionamento estAlugar = c.pesquisarEstacionamento(query.get("email"));
+                    Carro carroAlugar = c.pesquisaCarro(query.get("placa"));
+                    estAlugar.alugarCarro(body, locAlugar, carroAlugar, query.get("odometro"));
+                    break;
+                case "retornarCarro":
+                    Estacionamento estRetornar = c.pesquisarEstacionamento(query.get("email"));
+                    Carro carroRetornar = c.pesquisaCarro(query.get("placa"));
+                    estRetornar.retornarCarro(body, carroRetornar,query.get("odometro"));
+                    break;
+                case "registrarCarroEstacionamento":
+                    Estacionamento estRegistro = c.pesquisarEstacionamento(query.get("email"));
+                    Carro carroPesquisado = c.pesquisaCarro(query.get("placa"));
+                    estRegistro.registrarCarro(body, carroPesquisado);
+                    break;
+                case "mostrarCarrosLocador":
+                    c.mostrarCarrosLocador(body,query.get("email"));
+                    break;
                 case "mostrarCarrosNoEstacionamento":
-                    c.getListaDeEstacionamentos().get(0).mostrarCarrosNoEstacionamento(body);
+                    Estacionamento est = c.pesquisarEstacionamento(query.get("email"));
+                    est.mostrarCarrosNoEstacionamento(body);
                     break;
                 case "realizarLogin":
                     c.validarUsuario(body,query.get("email"),query.get("senha"));
                     break;
-                case "mostrarHistorico":
-                    c.getListaDeEstacionamentos().get(0).getHistoricoDeAlugueis().mostrarHistorico(body);
+                case "mostrarHistoricoEstacionamento":
+                    Estacionamento estHist = c.pesquisarEstacionamento(query.get("email"));
+                    estHist.getHistoricoDeAlugueis().mostrarHistorico(body);
+                    break;
+                case "mostrarHistoricoLocador":
+                    Locador locHist = c.pesquisarLocador(query.get("email"));
+                    locHist.getPessoaLocador().getHistoricoDeAlugueis().mostrarHistorico(body);
+                    break;
+                case "mostrarHistoricoLocatario":
+                    Locatario locaHist = c.pesquisarLocatario(query.get("email"));
+                    locaHist.getHistoricoDeAlugueis().mostrarHistorico(body);
+                    break;
+                case "mostrarEstacionamentos":
+                    c.mostrarEstacionamentos(body);
+                    break;
+                case "nomeUsuario":
+                    c.nomeUsuario(body, query.get("email"));
+                    break;
             }
 
             body.close();

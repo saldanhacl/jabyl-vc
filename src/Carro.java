@@ -1,5 +1,7 @@
 import org.json.JSONObject;
 
+import java.io.PrintStream;
+
 public class Carro {
 
     private String placa;
@@ -13,8 +15,15 @@ public class Carro {
     private Locador donoDoCarro;
     private Estacionamento estacionamentoAtual;
 
+    public Carro() {
+    }
+
+    public Carro(String placa) {
+        this.setPlaca(placa);
+    }
+
     public Carro(String placa, String cor, String ano, String modelo) {
-        this.placa = placa;
+        this.setPlaca(placa);
         this.cor = cor;
         this.ano = ano;
         this.modelo = modelo;
@@ -48,6 +57,8 @@ public class Carro {
         else return "Nao";
     }
 
+
+
     public Locador getDonoDoCarro() {
         return donoDoCarro;
     }
@@ -76,8 +87,25 @@ public class Carro {
         this.aluguelDoCarro = aluguelDoCarro;
     }
 
-    public void setEstahReservado(boolean estahReservado) {
+    public void setEstahReservado(boolean estahReservado){
         this.estahReservado = estahReservado;
+    }
+
+    public void setEstahReservado(PrintStream body, boolean estahReservado) {
+
+        JSONObject json = new JSONObject();
+        String status = "Nao foi possivel reservar o carro.";
+
+        if (this.getEmAluguel().equals("Sim"))
+            status += " Carro esta alugado.";
+        else if (this.getEstahReservado().equals("Sim"))
+            status += " Carrro esta reservado";
+
+        else status = "Carro reservado com sucesso!";
+        this.estahReservado = estahReservado;
+
+        json.put("status", status);
+        body.println(json);
     }
 
     public String getEstahReservado() {
@@ -93,6 +121,11 @@ public class Carro {
         this.estacionamentoAtual = estacionamentoAtual;
     }
 
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
     public JSONObject toJson(){
 
         JSONObject json = new JSONObject();
@@ -104,6 +137,7 @@ public class Carro {
         json.put("Cor", this.cor);
         json.put("Alugado", this.getEmAluguel());
         json.put("Reservado", this.getEstahReservado());
+
 
         return json;
     }
